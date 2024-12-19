@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useStore } from "@/zustand/zustandStore";
 import { apiLimitCount } from "@/utils/apiLimitCount";
 
-const page = () => {
+const Page = () => {
 const [loading, setloading] = useState(false);
 const [email, setemail] = useState('')
 const router = useRouter()
@@ -39,7 +39,7 @@ const {data:session,status} = useSession()
       proFunction()
       
     }
-  }, [status]);
+  }, [status,session,updateCount,updateModel,router]);
 
     const onSubscribe = async () => {
         try {
@@ -85,4 +85,4 @@ const {data:session,status} = useSession()
   );
 };
 
-export default page;
+export default Page;

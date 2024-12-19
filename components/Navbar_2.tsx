@@ -4,10 +4,13 @@ import { useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
 import fv from "./../public/fv-ai-logo.png";
+import { useRouter } from "next/navigation";
 
 const Navbar_2 = () => {
   const { data: session, status } = useSession();
   const [dropdown, setDropdown] = useState(false);
+
+  const router = useRouter();
 
   return (
     <div className="navbar w-full">
@@ -30,7 +33,7 @@ const Navbar_2 = () => {
                   type="button"
                   onClick={() => {
                     signOut();
-                    redirect("/");
+                    router.push("/");
                   }}
                   className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2 me-2"
                 >
@@ -60,13 +63,13 @@ const Navbar_2 = () => {
                 {/* Dropdown Menu */}
                 {dropdown && (
                   <div
-                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
+                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none "
                     role="menu"
                     aria-orientation="vertical"
                   >
                     <a
                       href="/settings"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-gray-100"
                       role="menuitem"
                     >
                       Settings
@@ -75,7 +78,7 @@ const Navbar_2 = () => {
                       onClick={() => {
                         signOut();
                       }}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-gray-100"
                       role="menuitem"
                     >
                       Sign out
@@ -86,37 +89,6 @@ const Navbar_2 = () => {
             </div>
           </div>
         </div>
-
-        {/* Mobile Menu (Hidden by Default) */}
-        {/* <div className="sm:hidden" id="mobile-menu">
-          <div className="space-y-1 px-2 pb-3 pt-2">
-            <a
-              href="#"
-              className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-              aria-current="page"
-            >
-              Dashboard
-            </a>
-            <a
-              href="#"
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-            >
-              Team
-            </a>
-            <a
-              href="#"
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-            >
-              Projects
-            </a>
-            <a
-              href="#"
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-            >
-              Calendar
-            </a>
-          </div>
-        </div> */}
       </nav>
     </div>
   );

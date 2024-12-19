@@ -30,17 +30,17 @@ const handleDeleteListItem = async (item: any, setproductsInfo: any) => {
     );
     const data = await res.json();
     const productInfoUpdated = await JSON.parse(data.updatedList);
-    console.log(
-      "res fdrom the server deletelistiem:",
-      typeof productInfoUpdated
-    );
+    // console.log(
+    //   "res fdrom the server deletelistiem:",
+    //   typeof productInfoUpdated
+    // );
     setproductsInfo(productInfoUpdated);
   } catch (error: any) {
     console.log("error in handleDeleteListItem:", error.message);
   }
 };
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const [productsInfo, setproductsInfo] = useState<prod_info[]>([{}]);
   const storeVal = useStore((state: any) => state.count);
@@ -49,12 +49,11 @@ const page = () => {
 
   const { data: session, status } = useSession();
 
-  if (status === "unauthenticated") {
-    router.push("/");
-  }
-
   useEffect(() => {
     async function fetchProducts() {
+      if (status === "unauthenticated") {
+        router.push("/");
+      }
       try {
         const result = await apiLimitCount(session);
         updateCount(result.count);
@@ -63,11 +62,11 @@ const page = () => {
         } else {
           updateModel(false);
         }
-        console.log("userid of user in userlist:");
+        // console.log("userid of user in userlist:");
         const response = await fetch(`/api/userlist/${session?.user?.email}`); // Call the API route
         const data = await response.json();
         const productJson = await JSON.parse(data.userListInfo);
-        console.log(typeof data);
+        // console.log(typeof data);
         setproductsInfo(productJson); // Set the data to state
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -78,7 +77,7 @@ const page = () => {
     if (status === "authenticated") {
       fetchProducts();
     }
-  }, [session, handleDeleteListItem]);
+  }, [session,status, handleDeleteListItem, updateCount, updateModel, router]);
 
   return (
     <div className="m-1 ">
@@ -125,4 +124,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

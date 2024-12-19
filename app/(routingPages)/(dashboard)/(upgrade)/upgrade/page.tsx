@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import { useStore } from "@/zustand/zustandStore";
 import { apiLimitCount } from "@/utils/apiLimitCount";
 
-const page = () => {
+const Page = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const storeVal = useStore((state: any) => state.count);
@@ -34,7 +34,7 @@ const page = () => {
     if (status == "authenticated") {
       proFunction();
     }
-  }, [status]);
+  }, [status,session, updateCount, updateModel, router]);
 
   return (
     <div>
@@ -43,4 +43,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

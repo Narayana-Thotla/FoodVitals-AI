@@ -67,7 +67,7 @@ const healthprofileItems = [
 
 console.log(loopOfField[0]);
 
-const page = () => {
+const Page = () => {
   const [inputValue, setInputValue] = useState("");
   const [userHealthData, setuserHealthData] = useState<hecon[]>([]);
   const storeVal = useStore((state: any) => state.count);
@@ -101,7 +101,16 @@ const page = () => {
     if (status === "authenticated") {
       allHealthCon();
     }
-  }, [status, inputValue, setuserHealthData, userHealthData]);
+  }, [
+    status,
+    updateCount,
+    updateModel,
+    router,
+    session,
+    inputValue,
+    setuserHealthData,
+    userHealthData,
+  ]);
 
   const handleSave = async (heaCon: string) => {
     if (!inputValue) {
@@ -120,7 +129,7 @@ const page = () => {
     }
 
     try {
-      console.log(heaCon);
+     // console.log(heaCon);
       const response = await fetch(
         `/api/healthprofile/${session?.user?.email}/${heaCon}`,
         {
@@ -175,13 +184,13 @@ const page = () => {
   };
 
   const deleteVal = async (hpfield: any, item: any) => {
-    console.log(hpfield, item);
+    //console.log(hpfield, item);
     const res = await fetch(
       `/api/healthprofile/${session?.user?.email}/${hpfield}/${item}`
     );
     const dataaa = await res.json();
     await setuserHealthData(dataaa.editedData);
-    console.log("dlelete val json:", dataaa.editedData);
+    //console.log("dlelete val json:", dataaa.editedData);
   };
 
   return (
@@ -269,7 +278,7 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
 
 //         |||||for reference for future in doubt||||||
 {

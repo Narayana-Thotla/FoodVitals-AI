@@ -9,9 +9,6 @@ import Script from "next/script";
 import { Html5Qrcode } from "html5-qrcode";
 import { Html5QrcodeScanner } from "html5-qrcode";
 
-import { QRCodeScanner } from "@/components/scanners/QRCodeScanner";
-import { BarcodeScanner } from "@/components/scanners/BarcodeScanner";
-
 import ingrBg from "./../../../../public/freepik__expand__48121.png";
 import {
   ScanBarcode,
@@ -30,7 +27,7 @@ import ScanPage from "@/custom-Hooks/scanPage";
 
 var html5QrCode: any;
 
-const scanBarcode = async (setscanning:any) => {
+const scanBarcode = async (setscanning: any) => {
   html5QrCode = new Html5Qrcode(/* element id */ "reader");
   html5QrCode
     .start(
@@ -46,14 +43,12 @@ const scanBarcode = async (setscanning:any) => {
         html5QrCode
           .stop()
           .then((ignore: any) => {
-            setscanning(false)
+            setscanning(false);
             // QR Code scanning is stopped.
           })
           .catch((err: any) => {
             // Stop failed, handle it.
           });
-
-        
       },
       (errorMessage: any) => {
         // parse error, ignore it.
@@ -65,7 +60,7 @@ const scanBarcode = async (setscanning:any) => {
     });
 };
 
-const backendScanPage = () => {
+const BackendScanPage = () => {
   const [scanning, setscanning] = useState(false);
   return (
     <div>
@@ -214,4 +209,4 @@ const backendScanPage = () => {
   );
 };
 
-export default backendScanPage;
+export default BackendScanPage;

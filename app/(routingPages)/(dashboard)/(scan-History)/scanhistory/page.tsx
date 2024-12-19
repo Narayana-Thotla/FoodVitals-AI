@@ -32,7 +32,7 @@ interface prod_info {
   product_summary?: String;
 }
 
-const page = () => {
+const Page = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [productsInfo, setproductsInfo] = useState<prod_info[]>([{}]);
   const [showStatusBar, setShowStatusBar] = React.useState<Checked>(false);
@@ -77,7 +77,7 @@ const page = () => {
     if (status === "authenticated") {
       fetchProducts();
     }
-  }, [status, session]);
+  }, [status, session, updateCount, updateModel, router]);
 
   const handleScanListApi = async (item: any) => {
     try {
@@ -186,4 +186,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

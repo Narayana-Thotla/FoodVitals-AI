@@ -221,17 +221,17 @@ const sendScannedCodeToBackend = async (
 ) => {
   try {
     setloading(true);
-    console.log("session in front end scan:", session);
+    // console.log("session in front end scan:", session);
     const res = await fetch(
       `http://localhost:3000/api/getingredients/${session?.user?.email}/${decodedText}`
     );
     const data = await res.json();
     const objData = await JSON.parse(data.data);
     setproductInfo(objData);
-    console.log(
-      "data fetched in sendScannedCodeToBackend:",
-      objData.product.ingredients_text
-    );
+    // console.log(
+    //   "data fetched in sendScannedCodeToBackend:",
+    //   objData.product.ingredients_text
+    // );
 
     if (!res.ok) {
       toast("Sorry product not found!!!", {
@@ -247,7 +247,6 @@ const sendScannedCodeToBackend = async (
     }
 
     if (objData.product.ingredients_text) {
-      console.log("yaaaa");
       // chatgptApiCall();
       geminiApiCall(
         objData.product.ingredients_text,
@@ -269,9 +268,8 @@ const sendScannedCodeToBackend = async (
 
 const chatgptApiCall = async () => {
   const res = await fetch("/api/chatgpt");
-  console.log(res);
   const resMessFromChatgpt = await res.json();
-  console.log("response message from chatgpt!!!:", resMessFromChatgpt);
+  // console.log("response message from chatgpt!!!:", resMessFromChatgpt);
 };
 
 const geminiApiCall = async (
@@ -295,7 +293,7 @@ const geminiApiCall = async (
     });
 
     const resMessFromgemini = await res.json();
-    console.log("response message from chatgpt!!!:", resMessFromgemini.message);
+    // console.log("response message from chatgpt!!!:", resMessFromgemini.message);
 
     setsummaryText(resMessFromgemini.message);
     setsummaryIndicator(resMessFromgemini.summary);
@@ -308,30 +306,25 @@ const geminiApiCall = async (
 };
 
 const ApiLimitCount = async (session: any) => {
-  console.log(session);
   const apiLimitStatus = await fetch(
     `/api/apilimit/checkapilimit/${session?.user?.email}`
   );
   const result = await apiLimitStatus.json();
-  console.log("result of apilimit:", result.count);
-
+  // console.log("result of apilimit:", result.count);
   return result;
 };
 
 ApiLimitCountIncrement = async (session: any, updateCount: any) => {
-  console.log(session);
   const apiLimitStatus = await fetch(
     `/api/apilimit/incrementapilimit/${session?.user?.email}`
   );
   const result = await apiLimitStatus.json();
-  console.log("result of apilimitincrement count:", result.count);
-
+  // console.log("result of apilimitincrement count:", result.count);
   updateCount(result.count);
-
   return result;
 };
 
-const backendScanPage = () => {
+const BackendScanPage = () => {
   const [loading, setloading] = useState(false);
   const [scanning, setscanning] = useState(false);
   const [decodedtext, setdecodedtext] = useState("");
@@ -348,7 +341,7 @@ const backendScanPage = () => {
   const updateCount = useStore((state: any) => state.updateCount);
   const updateModel = useStore((state: any) => state.updateModel);
 
-  console.log("storeval from zustand in scan:", storeVal); // Logs the current count from Zustand store
+  // console.log("storeval from zustand in scan:", storeVal);// Logs the current count from zustand
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -366,9 +359,9 @@ const backendScanPage = () => {
         } else {
           updateModel(false);
         }
-        console.log("apilimitresult status:)", result);
+        // console.log("apilimitresult status:)", result);
         if (result.status == 403) {
-          console.log("!result in scan:", result);
+          // console.log("!result in scan:", result);
           // alert("free tier limit is up , please upgrade your plan");
           toast(`Free tier limit is up, please upgrade your plan!`, {
             position: "top-center",
@@ -386,9 +379,9 @@ const backendScanPage = () => {
     };
 
     checkApiLimit();
-  }, [session]);
+  }, [session,updateCount,updateModel,router]);
 
-  console.log(loading);
+  // console.log(loading);
 
   const handleInputChange = (e: any) => {
     setSearchInput(e.target.value); // Update search input state
@@ -601,4 +594,4 @@ const backendScanPage = () => {
   );
 };
 
-export default backendScanPage;
+export default BackendScanPage;

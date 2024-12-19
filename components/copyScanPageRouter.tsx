@@ -10,8 +10,6 @@ import Script from "next/script";
 import { Html5Qrcode } from "html5-qrcode";
 import { Html5QrcodeScanner } from "html5-qrcode";
 
-import { QRCodeScanner } from "@/components/scanners/QRCodeScanner";
-import { BarcodeScanner } from "@/components/scanners/BarcodeScanner";
 
 import ingrBg from "./../../../../public/freepik__expand__48121.png";
 import {
@@ -31,7 +29,7 @@ import ScanPage from "@/custom-Hooks/scanPage";
 import backendScanPage from "@/components/backendScanPage";
 // import BarcodeScanner from "@/components/barcodeScanner";
 
-const page = () => {
+const Page = () => {
   const [loading, setloading] = useState(false);
   const [scannedCode, setScannedCode] = useState("");
   const [showScanner, setShowScanner] = useState(false);
@@ -270,4 +268,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

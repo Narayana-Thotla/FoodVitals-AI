@@ -7,12 +7,7 @@ import {
   HeartPulse,
   History,
   CircleFadingArrowUp,
-  Calendar,
-  Home,
-  Inbox,
-  Search,
   Settings,
-  Fullscreen,
 } from "lucide-react";
 
 import {
@@ -64,22 +59,19 @@ const items = [
 ];
 
 export function AppSidebar({ count }: any) {
-  console.log("count inside appsidebar:", count);
+  //console.log("count inside appsidebar:", count);
   const storeVal = useStore((state: any) => state.count);
   const proVal = useStore((state: any) => state.isInProModel);
-  console.log("coutn value from zustand:", storeVal, proVal);
-
+  //console.log("coutn value from zustand:", storeVal, proVal);
 
   return (
     <>
       <div className="bg-white">
         <Sidebar className="bg-white">
-          {/* <Sidebar className= "bg-gradient-to-b from-[#b5b9ba] via-[#b5b9ba] to-gray-800"> */}
           <SidebarHeader className="bg-white ">
             <div className="flex items-center gap-1.5">
               <Image
                 className="rounded-md"
-                // src={FoodVitals_AI_Logo}
                 src={fv_ai}
                 width={75}
                 alt="missing img"
@@ -116,24 +108,26 @@ export function AppSidebar({ count }: any) {
           </SidebarContent>
           <SidebarFooter className=" bg-white ">
             <div className="bg-gray-300 rounded-md mx-1 my-1   px-10 py-3 ">
-            <div className="flex flex-col justify-center items-center  gap-1">
-              {proVal ? (
-                <p className="text-xl font-bold bg-gradient-to-r from-teal-500 via-pink-500 to-lime-400 text-transparent bg-clip-text">You are in pro model</p>
-              ) : (
-                <div>
-                  <div className="text-lg text-center text-black mb-0.5 font-bold">
-                    {storeVal}/5
-                  </div>
+              <div className="flex flex-col justify-center items-center  gap-1">
+                {proVal ? (
+                  <p className="text-xl font-bold bg-gradient-to-r from-teal-500 via-pink-500 to-lime-400 text-transparent bg-clip-text">
+                    You are in pro model
+                  </p>
+                ) : (
+                  <div>
+                    <div className="text-lg text-center text-black mb-0.5 font-bold">
+                      {storeVal}/5
+                    </div>
 
-                  <button
-                    type="button"
-                    className="text-gray-900 bg-gradient-to-r from-teal-300 to-lime-400 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-bold rounded-lg text-md px-5  py-1 text-center me-2 "
-                  >
-                    Upgrade
-                  </button>
-                </div>
-              )}
-            </div>
+                    <button
+                      type="button"
+                      className="text-gray-900 bg-gradient-to-r from-teal-300 to-lime-400 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-bold rounded-lg text-md px-5  py-1 text-center me-2 "
+                    >
+                      Upgrade
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </SidebarFooter>
         </Sidebar>

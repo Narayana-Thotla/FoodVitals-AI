@@ -5,7 +5,6 @@ import { Inter } from "next/font/google";
 import Navbar_2 from "@/components/Navbar_2";
 import Footer from "@/components/Footer";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { ToastContainer, toast } from "react-toastify";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/ui/app-Sidebar";
@@ -30,7 +29,7 @@ export default function RootLayout({
         );
         const countNum = await countValue.json();
         setcount(countNum.count);
-        console.log("countNumber inside appsidebar:", countNum);
+        // console.log("countNumber inside appsidebar:", countNum);
       } catch (error) {}
     };
     if (status === "authenticated" && session) {
@@ -38,22 +37,6 @@ export default function RootLayout({
     }
   }, [session, status]);
 
-  useEffect(() => {
-    const countApi = async () => {
-      try {
-        const countValue = await fetch(
-          `/api/apilimit/checkapilimit/${session?.user?.email}`
-        );
-        const countNum = await countValue.json();
-        setcount(countNum.count);
-        console.log("countNumber inside appsidebar:", countNum);
-        // return await countNum
-      } catch (error) {}
-    };
-    if (status === "authenticated" && session) {
-      countApi();
-    }
-  }, []);
 
   return (
     <>

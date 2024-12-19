@@ -39,25 +39,24 @@ export function PricingCard({
   const onSubscribe = async () => {
     try {
       setloading(true);
-      console.log("email in upgrade-pricing card-2:", email);
+      // console.log("email in upgrade-pricing card-2:", email);
       const res = await fetch(`/api/stripe/${email}`);
-      const data = await res.json()
-      console.log(res,data)
-      const stripeUrl = await JSON.parse(data.url)
-      console.log(stripeUrl)
-      window.location.href =  stripeUrl
-      console.log(window.location.href);
+      const data = await res.json();
+      // console.log(res,data)
+      const stripeUrl = await JSON.parse(data.url);
+      // console.log(stripeUrl)
+      window.location.href = stripeUrl;
+      // console.log(window.location.href);
     } catch (error: any) {
       console.log("errror in upgradepage_2:", error.message);
     } finally {
       setloading(false);
     }
   };
-  
+
   const goToScanPage = () => {
-    router.push('/scan')
-  }
-  
+    router.push("/scan");
+  };
 
   useEffect(() => {
     if (status == "loading") {
@@ -66,7 +65,7 @@ export function PricingCard({
     if (status == "authenticated") {
       setemail(session?.user?.email || "");
     }
-  }, [status]);
+  }, [status, session]);
 
   return (
     <div

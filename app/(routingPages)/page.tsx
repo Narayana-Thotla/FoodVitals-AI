@@ -9,13 +9,13 @@ import Typewriter from "typewriter-effect";
 export default function Home() {
   const router = useRouter();
   const { data: session } = useSession();
-  console.log("session inside loginpage:", session);
+  //console.log("session inside loginpage:", session);
 
   useEffect(() => {
     if (session) {
       router.push("/scan");
     }
-  }, []);
+  }, [session, router]);
 
   if (session) {
     router.push("/scan");
@@ -27,7 +27,7 @@ export default function Home() {
         <div className="font-bold  text-4xl mt-10 text-slate-800 text-center">
           FoodVitals-AI
         </div>
-        <div className="font-bold text-3xl text-center mt-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-300  to-green-500 ">
+        <div className="font-bold text-3xl text-center mt-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-300   to-pink-500 ">
           <Typewriter
             options={{
               strings: [
