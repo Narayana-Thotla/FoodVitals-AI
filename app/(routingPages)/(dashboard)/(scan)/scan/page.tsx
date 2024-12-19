@@ -223,7 +223,7 @@ const sendScannedCodeToBackend = async (
     setloading(true);
     // console.log("session in front end scan:", session);
     const res = await fetch(
-      `http://localhost:3000/api/getingredients/${session?.user?.email}/${decodedText}`
+      `/api/getingredients/${session?.user?.email}/${decodedText}`
     );
     const data = await res.json();
     const objData = await JSON.parse(data.data);

@@ -15,7 +15,7 @@ export async function POST(
   // console.log(productIngredients);
 
   const res = await fetch(
-    `http://localhost:3000/api/healthprofile/${userid}/all`
+    `/api/healthprofile/${userid}/all`
   );
   const hpData = await res.json();
   const hpJSONData = await JSON.parse(hpData.data);
