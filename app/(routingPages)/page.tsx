@@ -6,9 +6,6 @@ import { redirect, useRouter } from "next/navigation";
 import foodvidtal_pic from "@/public/FoodVitals_AI_Logo.jpg";
 import Typewriter from "typewriter-effect";
 
-import Image from "next/image";
-import MeterGauge from "@/components/ui/gauge";
-
 export default function Home() {
   const router = useRouter();
   const { data: session } = useSession();
@@ -21,28 +18,13 @@ export default function Home() {
   }, []);
 
   if (session) {
-    // redirect('/scan')
     router.push("/scan");
   }
-
-  // else {
-
-  //   redirect('/')
-  //   alert('login/signin was unsuccessful!!!')
-  // }
 
   return (
     <>
       <div className="text-white h-screen">
         <div className="font-bold  text-4xl mt-10 text-slate-800 text-center">
-          {/* <Image
-          className="rounded-xl mx-auto"
-            src={foodvidtal_pic}
-            width={150}
-            height={150}
-            alt="Picture of the author"
-            priority 
-          /> */}
           FoodVitals-AI
         </div>
         <div className="font-bold text-3xl text-center mt-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-300  to-green-500 ">
