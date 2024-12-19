@@ -44,10 +44,6 @@ const page = () => {
   const updateCount = useStore((state: any) => state.updateCount);
   const updateModel = useStore((state: any) => state.updateModel);
 
-  // if(!session){
-  //   router.push('/')
-  // }
-
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
@@ -69,16 +65,13 @@ const page = () => {
         }
         const response = await fetch(
           `/api/productscanned/${session?.user?.email}`
-        ); // Call the API route
+        );
         const data = await response.json();
         const productJson = await JSON.parse(data.productsInfo);
-        // console.log(productJson[0])
-        // console.log("data retrieved from db scanhistory:", productJson);
-        setproductsInfo(productJson); // Set the data to state
+        setproductsInfo(productJson);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
-        // setLoading(false);
       }
     }
     if (status === "authenticated") {
@@ -103,7 +96,6 @@ const page = () => {
           "response in handlescanlistAPI sending req to backend:",
           res
         );
-        // Clear input after successful save
       } else {
         const errorData = await res.json();
         // alert(`Error: ${errorData.message}`);
@@ -131,10 +123,7 @@ const page = () => {
 
         <div className="bg-white border-green-600 ">
           <div className="flex m-2 p-2 bg-white flex-wrap w-[72vw] justify-between  ">
-            {/* <div className="p-2 lg:w-1/3   md:w-1/2"> */}
-
             {productsInfo.map((item, index) => {
-              // console.log(item, index);
               return (
                 <div
                   key={index}
@@ -142,7 +131,6 @@ const page = () => {
                 >
                   <Image
                     className="mr-7"
-                    // src={fv}
                     src={(item.product_image_url as string) || fv}
                     width={150}
                     height={150}
@@ -150,7 +138,6 @@ const page = () => {
                   />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
-                      {/* Holden Caulfield */}
                       {item.product_name}
                     </h2>
                     <p className="text-gray-500">&nbsp;</p>
@@ -168,7 +155,6 @@ const page = () => {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-56">
-                        {/* <DropdownMenuLabel>Add to list</DropdownMenuLabel> */}
                         <DropdownMenuSeparator />
                         <DropdownMenuCheckboxItem
                           checked={showStatusBar}
@@ -178,7 +164,6 @@ const page = () => {
                               handleScanListApi(item);
                             }
                           }}
-                          // onCheckedChange={setShowStatusBar}
                         >
                           Add to list
                         </DropdownMenuCheckboxItem>

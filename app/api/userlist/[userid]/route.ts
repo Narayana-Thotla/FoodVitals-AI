@@ -12,12 +12,8 @@ export async function POST(
     const user_id = Number(userid);
     const body = await req.json();
     const { scanListItem } = body;
-    console.log(" val of userid in userlist route:!!", typeof user_id);
+    // console.log(" val of userid in userlist route:!!", typeof user_id);
 
-    // Fetch products from the database
-    // const products = await prisma.product.findMany({});
-    // const productToString = JSON.stringify(products)
-    // console.log('products in db',products);
 
     if (scanListItem) {
       const newScanItem = await prisma.useraddedlist.create({
@@ -35,7 +31,7 @@ export async function POST(
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error fetching products:", error);
+    // console.error("Error fetching products:", error);
     return NextResponse.json(
       { error: "error in retrieving data from db" },
       { status: 500 }
@@ -47,11 +43,9 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { userid: any } }
 ) {
-  const { userid  }  = params;
-
+  const { userid } = params;
 
   try {
-
     const findUserByEmail = await prisma.users.findUnique({
       where: {
         email: userid,

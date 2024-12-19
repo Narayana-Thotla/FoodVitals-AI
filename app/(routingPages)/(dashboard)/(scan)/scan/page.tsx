@@ -15,28 +15,14 @@ import Script from "next/script";
 import { Html5Qrcode } from "html5-qrcode";
 import { Html5QrcodeScanner } from "html5-qrcode";
 
-import { QRCodeScanner } from "@/components/scanners/QRCodeScanner";
-import { BarcodeScanner } from "@/components/scanners/BarcodeScanner";
 import structuredFormatText from "@/components/structuredFormatText";
 import Loader from "@/components/ui/loading_ui";
 
 import ingrBg from "@/public/default_image.png";
-import {
-  ScanBarcode,
-  HeartPulse,
-  History,
-  CircleFadingArrowUp,
-  Calendar,
-  Home,
-  Inbox,
-  Search,
-  Settings,
-  Fullscreen,
-} from "lucide-react";
+import { ScanBarcode } from "lucide-react";
 import ScanPage from "@/custom-Hooks/scanPage";
 import { useStore } from "@/zustand/zustandStore";
 import { error } from "console";
-// import BarcodeScanner from "@/components/barcodeScanner";
 
 var html5QrCode: any;
 interface Product {
@@ -137,7 +123,7 @@ const scanBarcode = async (
        */
       if (devices && devices.length) {
         var cameraId = devices[0].id; // Use the first camera
-        html5QrCode = new Html5Qrcode(/* element id */ "reader");
+        html5QrCode = new Html5Qrcode("reader");
 
         html5QrCode
           .start(
@@ -241,7 +227,6 @@ const sendScannedCodeToBackend = async (
     );
     const data = await res.json();
     const objData = await JSON.parse(data.data);
-    // console.log('data fetched in sendScannedCodeToBackend:',data)
     setproductInfo(objData);
     console.log(
       "data fetched in sendScannedCodeToBackend:",
@@ -279,7 +264,6 @@ const sendScannedCodeToBackend = async (
   } catch (error: any) {
     console.log("error in sendscannedcodetobackend function:", error.message);
   } finally {
-    // router.refresh()
   }
 };
 
@@ -310,7 +294,6 @@ const geminiApiCall = async (
       body: JSON.stringify(productIngredient),
     });
 
-    // console.log(await res.json());
     const resMessFromgemini = await res.json();
     console.log("response message from chatgpt!!!:", resMessFromgemini.message);
 
@@ -321,7 +304,6 @@ const geminiApiCall = async (
   } catch (error: any) {
     console.log("error in geminiApiCall function:", error.message);
   } finally {
-    // router.refresh()
   }
 };
 

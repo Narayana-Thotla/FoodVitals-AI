@@ -38,7 +38,6 @@ const page = () => {
 
   return (
     <div>
-      {/* <UpgradePage /> */}
       <UpgradePage />
     </div>
   );

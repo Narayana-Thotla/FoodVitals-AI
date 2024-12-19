@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient, product } from "@prisma/client";
-import { Item } from "@radix-ui/react-accordion";
 
 const prisma = new PrismaClient();
 
@@ -19,12 +18,8 @@ export async function GET(
   { params }: { params: { product_code: any; userid: any } }
 ) {
   const { product_code, userid } = params;
-  const user_id = Number(userid)
-  console.log(
-    "product code and userid in deletlistitem:",
-    product_code,
-    userid
-  );
+  const user_id = Number(userid);
+
   try {
     const userListInfo = await prisma.useraddedlist.findMany({
       where: {
@@ -43,26 +38,17 @@ export async function GET(
       },
     });
 
-    console.log("deleted product in deletelistitem:", deletedProduct);
-
     if (deletedProduct.count > 0) {
-      // Fetch the remaining data
       const remainingProducts = await prisma.useraddedlist.findMany({
         where: {
           user_id: user_id,
         },
       });
 
-      console.log("Remaining products after deletion:", remainingProducts);
-
-      console.log("inside filtered method in deletelist itme:", filtered);
-
-      console.log("userlistinfo in deletelistitem:", userListInfo);
-
       if (deletedProduct && remainingProducts) {
         return NextResponse.json({
           message: "nice its doing fine",
-          updatedList:`${JSON.stringify(remainingProducts)}`,
+          updatedList: `${JSON.stringify(remainingProducts)}`,
           status: 200,
         });
       }
@@ -76,7 +62,6 @@ export async function GET(
       error: "no products in the wishlist!!",
       status: 202,
     });
-
   } catch (error: any) {
     console.log("error in deletelistitem:", error.message);
   }

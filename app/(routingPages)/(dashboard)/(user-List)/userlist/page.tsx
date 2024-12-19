@@ -25,7 +25,6 @@ interface prod_info {
 
 const handleDeleteListItem = async (item: any, setproductsInfo: any) => {
   try {
-    // console.log('itme val in handle delelte list item:',item)
     const res = await fetch(
       `/api/userlist/deletelistitem/${item.product_code}/${item.user_id}`
     );
@@ -91,7 +90,6 @@ const page = () => {
         <div className="bg-white border-green-600 ">
           <div className="flex m-2 p-2 bg-white flex-wrap w-[72vw] justify-between  ">
             {productsInfo.map((item: any, index: any) => {
-              // console.log(item, index);
               return (
                 <div
                   key={index}
@@ -99,7 +97,6 @@ const page = () => {
                 >
                   <Image
                     className="mr-7"
-                    // src={fv}
                     src={(item.product_image_url as string) || fv}
                     width={150}
                     height={150}
@@ -107,7 +104,6 @@ const page = () => {
                   />
                   <div className="flex-grow">
                     <h2 className="text-gray-900 title-font font-medium">
-                      {/* Holden Caulfield */}
                       {item.product_name}
                     </h2>
                     <p className="text-gray-500">&nbsp;</p>
@@ -119,7 +115,6 @@ const page = () => {
                     }}
                     className="cursor-pointer"
                   />
-                  {/* <!-- Dropdown menu --> */}
                 </div>
               );
             })}

@@ -70,15 +70,15 @@ const {data:session,status} = useSession()
         <button
         onClick={onSubscribe}
           type="button"
-          className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-16 py-2.5 text-center me-2 mb-2"
+          className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-bold rounded-lg text-sm px-8 py-2.5 text-center me-2 mb-2 "
         >
-          Upgrade
+          Manage Subscriptions
         </button>
 
         <button onClick={() => {
           signOut()
         }
-        } type="button" className="text-white block bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-16 py-2.5 text-center me-2 mb-2">SignOut</button>
+        } type="button" className="text-white block bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-20 py-2.5 text-center me-2 mb-2">SignOut</button>
 
       </div>
     </div>

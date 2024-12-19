@@ -23,7 +23,7 @@ export async function GET(
         },
       });
       const productToString = JSON.stringify(products);
-      console.log("products in db", products);
+      // console.log("products in db", products);
 
       return NextResponse.json(
         { productsInfo: `${productToString}` },

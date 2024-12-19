@@ -10,7 +10,7 @@ export async function GET(
     params,
   }: { params: { userid: string; healthcondition: string; delval: string } }
 ) {
-  console.log(params);
+  // console.log(params);
   const { userid, healthcondition, delval } = params;
 
   const user_id = await prisma.users.findUnique({
@@ -25,11 +25,11 @@ export async function GET(
     where: { user_id: uid }, //have to replace in future for authentication//
   });
 
-  console.log((existingUser as any)?.[healthcondition]);
+  // console.log((existingUser as any)?.[healthcondition]);
 
   let filteredVal: string[] = (existingUser as any)?.[healthcondition];
   let finalFilter = filteredVal.filter((val) => val !== delval);
-  console.log("filtered value:", finalFilter);
+  // console.log("filtered value:", finalFilter);
 
   const successfulDeletion = await prisma.healthprofile.update({
     where: { user_id: uid }, //have to replace in future for authentication//
@@ -37,7 +37,7 @@ export async function GET(
       [healthcondition]: finalFilter,
     },
   });
-  console.log("successful deletion:", successfulDeletion);
+  // console.log("successful deletion:", successfulDeletion);
   if (successfulDeletion) {
     return NextResponse.json({ editedData: successfulDeletion, status: 200 });
   }

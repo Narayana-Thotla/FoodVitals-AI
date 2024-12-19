@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { ChevronRight } from "lucide-react";
-import { CornerDownRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { toast } from "react-toastify";
@@ -17,7 +16,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useStore } from "@/zustand/zustandStore";
-import {apiLimitCount} from '@/utils/apiLimitCount'
+import { apiLimitCount } from "@/utils/apiLimitCount";
 
 type hecon = {
   id: String;
@@ -78,39 +77,31 @@ const page = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  // if (!session) {
-  //   router.push("/");
-  // }
-
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/");
       return;
     }
     const allHealthCon = async () => {
-      const result = await  apiLimitCount(session);
+      const result = await apiLimitCount(session);
       updateCount(result.count);
       if (result.status == 202) {
         updateModel(true);
       } else {
         updateModel(false);
       }
-      const response = await fetch(`/api/healthprofile/${session?.user?.email}/all`);
+      const response = await fetch(
+        `/api/healthprofile/${session?.user?.email}/all`
+      );
       const data = await response.json();
       const jsonData = await JSON.parse(data.data);
       setuserHealthData(jsonData);
-      // console.log("data in healthprofile page:",jsonData[0].chronicConditions[0])
     };
 
-    // allHealthCon();
-
     if (status === "authenticated") {
-      
       allHealthCon();
     }
   }, [status, inputValue, setuserHealthData, userHealthData]);
-
-  // console.log(userHealthData);
 
   const handleSave = async (heaCon: string) => {
     if (!inputValue) {
@@ -130,14 +121,16 @@ const page = () => {
 
     try {
       console.log(heaCon);
-      const response = await fetch(`/api/healthprofile/${session?.user?.email}/${heaCon}`, {
-        // const response = await fetch(`/api/healthprofile/1/${allergy}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ inputval: inputValue }),
-      });
+      const response = await fetch(
+        `/api/healthprofile/${session?.user?.email}/${heaCon}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ inputval: inputValue }),
+        }
+      );
 
       if (response.ok) {
         // alert("Allergy saved successfully!");
@@ -151,7 +144,7 @@ const page = () => {
           progress: undefined,
           theme: "light",
         });
-        setInputValue(""); // Clear input after successful save
+        setInputValue("");
       } else {
         const errorData = await response.json();
         // alert(`Error: ${errorData.message}`);
@@ -181,19 +174,11 @@ const page = () => {
     }
   };
 
-  // console.log(loopOfField[1]);
-  // let loopStringedData=JSON.stringify(loopOfField[1])
-  // let x = userHealthData[0] as any;
-  // {
-  //   console.log(
-  //     userHealthData[0]?.allergies[0],
-  //     (userHealthData[0] as any)?.[loopOfField[0]][0]
-  //   );
-  // }
-
   const deleteVal = async (hpfield: any, item: any) => {
     console.log(hpfield, item);
-    const res = await fetch(`/api/healthprofile/${session?.user?.email}/${hpfield}/${item}`);
+    const res = await fetch(
+      `/api/healthprofile/${session?.user?.email}/${hpfield}/${item}`
+    );
     const dataaa = await res.json();
     await setuserHealthData(dataaa.editedData);
     console.log("dlelete val json:", dataaa.editedData);
@@ -258,7 +243,6 @@ const page = () => {
                                   </div>
                                   <div
                                     onClick={() => {
-                                      // console.log('inside delval onclick:',loopOfField[indexOfParent])
                                       deleteVal(
                                         loopOfField[indexOfParent],
                                         item
@@ -272,23 +256,6 @@ const page = () => {
                             </div>
                           );
                         })}
-
-                        {/* <div className=" my-3 mx-3 ">
-                    <div className="flex justify-between bg-gray-300 p-2 rounded-sm shadow-xl">
-                      <div className="flex">
-                        <div className="">
-                          <ChevronRight />
-                        </div>
-                        <div className="px-2">
-                          {" "}
-                          {userHealthData[0]?.allergies[0]}
-                        </div>
-                      </div>
-                      <div>
-                        <Trash2 className="cursor-pointer" />
-                      </div>
-                    </div>
-                  </div> */}
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>

@@ -20,7 +20,7 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }: any) {
-      console.log("inside the auth/[...nextauth]:", user, account, profile);
+      // console.log("inside the auth/[...nextauth]:", user, account, profile);
 
       if (account.provider == "github" || account.provider === "google") {
         const existingUser = await prisma.users.findUnique({
@@ -28,7 +28,8 @@ export const authOptions = {
             email: user.email,
           },
         });
-        console.log(existingUser);
+
+        // console.log(existingUser);
 
         if (!existingUser) {
           const newUser = await prisma.users.create({
@@ -38,7 +39,7 @@ export const authOptions = {
               count: 0,
             },
           });
-          console.log("user created in authoptions:", newUser);
+          // console.log("user created in authoptions:", newUser);
         }
       }
       return true;

@@ -27,7 +27,7 @@ export async function GET(
       });
 
       if (updatedIncrement) {
-        console.log("updatedIncrement::::", updatedIncrement);
+        // console.log("updatedIncrement::::", updatedIncrement);
 
         return NextResponse.json({
           incrementApiStatus: "incremented",

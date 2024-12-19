@@ -8,15 +8,15 @@ export async function POST(
   req: NextRequest,
   { params }: { params: { userid: any } }
 ) {
+  const { userid } = params;
 
-  const {userid} = params
-
-  
-  console.log(process.env.OPENAI_API_KEY);
+  // console.log(process.env.OPENAI_API_KEY);
   let productIngredients = await req.json();
-  console.log(productIngredients);
+  // console.log(productIngredients);
 
-  const res = await fetch(`http://localhost:3000/api/healthprofile/${userid}/all`);
+  const res = await fetch(
+    `http://localhost:3000/api/healthprofile/${userid}/all`
+  );
   const hpData = await res.json();
   const hpJSONData = await JSON.parse(hpData.data);
 
@@ -27,7 +27,7 @@ export async function POST(
     });
   }
 
-  console.log("hpdata in gemini route:", hpJSONData);
+  // console.log("hpdata in gemini route:", hpJSONData);
   let combinedArray: string[] = [];
 
   // Iterate over the parsed data and extract values
@@ -41,7 +41,7 @@ export async function POST(
     );
   });
 
-  console.log(combinedArray);
+  // console.log(combinedArray);
 
   const genAI = new GoogleGenerativeAI(`${process.env.GOOGLE_API_KEY}`);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -59,7 +59,7 @@ export async function POST(
   const googleHealthResult = await model.generateContent(healthRating);
   const googleHealthResponse = await googleHealthResult.response.text();
 
-  console.log("google-Gemini-response!!!:", result.response.text());
+  // console.log("google-Gemini-response!!!:", result.response.text());
 
   return NextResponse.json({
     message: googleResponse,
@@ -68,5 +68,3 @@ export async function POST(
     status: 200,
   });
 }
-
-//------------------------------------------------------------------------

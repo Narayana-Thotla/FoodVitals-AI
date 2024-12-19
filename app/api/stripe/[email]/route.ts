@@ -13,7 +13,7 @@ export async function GET(
 ) {
   try {
     const { email } = params;
-    console.log("email in api/stripe/route:", email);
+    // console.log("email in api/stripe/route:", email);
 
     const existingUser = await prisma.users.findUnique({
       where: {
@@ -33,25 +33,23 @@ export async function GET(
         email: email,
       },
     });
-    
-    console.log(
-      "existuser,usersubscripton:",
-      existingUser,
-      userSubscription?.stripecustomerid
-    );
+
+    // console.log(
+    //   "existuser,usersubscripton:",
+    //   existingUser,
+    //   userSubscription?.stripecustomerid
+    // );
 
     if (userSubscription && userSubscription.stripecustomerid) {
-      console.log("inside the if blcok");
+      // console.log("inside the if blcok");
 
-      console.log(userSubscription.stripecustomerid);
+      // console.log(userSubscription.stripecustomerid);
 
       const stripeSession = await stripe.billingPortal.sessions.create({
-        customer:userSubscription.stripecustomerid,
-        return_url:'http://localhost:3000/upgrade'
-      })
-      console.log('stripe session:',stripeSession);
-
-
+        customer: userSubscription.stripecustomerid,
+        return_url: "http://localhost:3000/upgrade",
+      });
+      // console.log('stripe session:',stripeSession);
 
       return NextResponse.json({
         url: JSON.stringify(stripeSession.url),

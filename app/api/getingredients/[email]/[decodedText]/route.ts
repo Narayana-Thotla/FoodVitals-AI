@@ -8,8 +8,8 @@ export async function GET(
   { params }: { params: { email: any; decodedText: string } }
 ) {
   const { email, decodedText } = params;
-  console.log(decodedText);
-  console.log(process.env.DB_URL_PASSWORD);
+  // console.log(decodedText);
+  // console.log(process.env.DB_URL_PASSWORD);
 
   try {
     const response = await fetch(
@@ -19,14 +19,14 @@ export async function GET(
     const dataFormat = await JSON.stringify(data);
 
     if (data.status === 1) {
-      console.log("Product Found:", data.code);
+      // console.log("Product Found:", data.code);
       // return data.product;
       createProduct(data, email);
-      console.log("dataformat in route.js:", data.product.product_name);
+      // console.log("dataformat in route.js:", data.product.product_name);
 
       return NextResponse.json({ data: `${dataFormat}` }, { status: 200 });
     } else {
-      console.error("Product not found.");
+      // console.error("Product not found.");
       return NextResponse.json({ message: "data not found" }, { status: 500 });
     }
   } catch (error) {
@@ -44,8 +44,8 @@ const createProduct = async (data: any, email: any) => {
     },
   });
   const idOfUser = finduser?.id;
-  console.log('id of user in get ingredients:',idOfUser,email);
-  
+  // console.log('id of user in get ingredients:',idOfUser,email);
+
   if (data && idOfUser) {
     const newUser = await prisma.product.create({
       data: {
