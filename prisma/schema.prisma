@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id               Int                @id @default(autoincrement())
+  username         String
+  email            String             @unique
+  count            Int
+  createdAt        DateTime           @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime           @default(now()) @db.Timestamp(6)
+  healthProfile    healthprofile?
+  product          product[]
+  useraddedlist    useraddedlist[]
+}
+
+model product {
+  id                  Int      @id @default(autoincrement())
+  user_id             Int
+  product_code        String   @db.VarChar(100)
+  product_name        String   @db.VarChar(100)
+  product_image_url   String?
+  product_ingredients String?
+  product_summary     String?
+  createdAt           DateTime @default(now()) @db.Timestamp(6)
+
+  user users @relation(fields: [user_id], references: [id])
+}
+
+model useraddedlist {
+  id                  Int     @id @default(autoincrement())
+  user_id             Int
+  product_code        String  @unique @db.VarChar(100)
+  product_name        String  @db.VarChar(100)
+  product_image_url   String?
+  product_ingredients String?
+  product_summary     String?
+
+  user users @relation(fields: [user_id], references: [id])
+}
+
+model healthprofile {
+  id                   Int      @id @default(autoincrement())
+  user_id              Int      @unique
+  allergies            String[] // Nullable array of strings for allergies
+  chronicConditions    String[] // Nullable array of strings for chronic conditions
+  pastSurgeries        String[] // Nullable array of strings for past surgeries
+  dietaryPreferences   String[] // Nullable array of strings for dietary preferences
+  familyMedicalHistory String[] // Nullable array of strings for family medical history
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  user users @relation(fields: [user_id], references: [id])
+}
+
+model usersubscription {
+  id                     Int       @id @default(autoincrement())
+  email                  String    @unique
+  stripecustomerid       String?   @unique @map(name: "stripe_customer_id")
+  stripesubscriptionid   String?   @unique @map(name: "stripe_subscription_id")
+  stripepriceid          String?   @map(name: "stripe_price_id")
+  stripecurrentperiodend DateTime? @map(name: "stripe_current_period_end")
+
+}
+
+model playing_with_neon {
+  id    Int    @id @default(autoincrement())
+  name  String
+  value Float? @db.Real
+}
