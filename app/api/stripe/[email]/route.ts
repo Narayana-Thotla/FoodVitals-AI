@@ -1,14 +1,13 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions, handler } from "@/app/api/auth/[...nextauth]/route";
 import { NextRequest, NextResponse } from "next/server";
-import { NextApiRequest, NextApiResponse } from "next";
 import { stripe } from "@/lib/stripe";
 import { PrismaClient, product } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export async function GET(
-  req: NextApiRequest,
+  req: NextRequest,
   { params }: { params: { email: string } }
 ) {
   try {

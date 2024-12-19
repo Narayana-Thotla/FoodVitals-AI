@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function GET(
-  res: NextResponse,
+  req: NextRequest,
   { params }: { params: { email: string } }
 ) {
   const { email } = params;
