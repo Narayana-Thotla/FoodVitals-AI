@@ -1,5 +1,5 @@
-import { getServerSession } from "next-auth/next";
-import { authOptions, handler } from "@/app/api/auth/[...nextauth]/route";
+// import { getServerSession } from "next-auth/next";
+// import { authOptions, handler } from "@/app/api/auth/[...nextauth]/route";
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { PrismaClient, product } from "@prisma/client";

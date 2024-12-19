@@ -7,7 +7,7 @@ import { signOut } from "next-auth/react";
 
 const prisma = new PrismaClient();
 
-export const authOptions = {
+export const handler = NextAuth({
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID || "",
@@ -18,7 +18,7 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET || '',
+  secret: process.env.NEXTAUTH_SECRET || "",
   callbacks: {
     async signIn({ user, account, profile, email, credentials }: any) {
       // console.log("inside the auth/[...nextauth]:", user, account, profile);
@@ -45,9 +45,9 @@ export const authOptions = {
       }
       return true;
     },
-    async signOut({ user, account, profile, email, credentials }: any) {
-      return true;
-    },
+    // async signOut({ user, account, profile, email, credentials }: any) {
+    //   return true;
+    // },
     async session({ session, user }: any) {
       if (user) {
         // Adding custom session properties (if needed)
@@ -57,7 +57,7 @@ export const authOptions = {
       return session;
     },
   },
-};
+});
 
-export const handler = NextAuth(authOptions);
+// export const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
