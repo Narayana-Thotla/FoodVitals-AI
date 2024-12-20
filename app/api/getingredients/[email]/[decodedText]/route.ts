@@ -75,7 +75,7 @@ const prisma = new PrismaClient();
 export async function GET(
   req: NextRequest,
   { params }: { params: { email: string; decodedText: string } }
-): Promise<Response> {
+): Promise<any> {
   const { email, decodedText } = params;
 
   try {
