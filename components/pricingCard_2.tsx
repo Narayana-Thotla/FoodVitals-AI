@@ -49,7 +49,7 @@ export function PricingCard({
       return;
     }
     if (status == "authenticated" ) {
-      console.log('user_email in pricing card:',session.user.email)
+      // console.log('user_email in pricing card:',session.user.email)
       setemail(session?.user?.email || "");
     }
   }, [status, session]);

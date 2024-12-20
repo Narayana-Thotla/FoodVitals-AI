@@ -46,7 +46,7 @@ export async function GET(
 
       const stripeSession = await stripe.billingPortal.sessions.create({
         customer: userSubscription.stripecustomerid,
-        return_url: "http://localhost:3000/upgrade",
+        return_url: `${process.env.NEXTAUTH_URL}/upgrade`,
       });
       // console.log('stripe session:',stripeSession);
 
@@ -57,8 +57,8 @@ export async function GET(
     }
 
     const stripeSession = await stripe.checkout.sessions.create({
-      success_url: "http://localhost:3000/scan",
-      cancel_url: "http://localhost:3000/scan",
+      success_url: `${process.env.NEXTAUTH_URL}/scan`,
+      cancel_url: `${process.env.NEXTAUTH_URL}/scan`,
       payment_method_types: ["card", "paypal"],
       mode: "subscription",
       billing_address_collection: "auto",
