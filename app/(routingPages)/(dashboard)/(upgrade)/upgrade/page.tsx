@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 
 // import { UpgradePage } from '@/pages/upgradePage'
-import UpgradePage from "@/pages/upgradePage_2"
+import UpgradePage from "@/pages/upgradePage_2";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useStore } from "@/zustand/zustandStore";
@@ -34,11 +34,11 @@ const Page = () => {
     if (status == "authenticated") {
       proFunction();
     }
-  }, [status,session, updateCount, updateModel, router]);
+  }, [status, session, updateCount, updateModel, router]);
 
   return (
     <div>
-      <UpgradePage />
+      <UpgradePage session={session} status={status} />
     </div>
   );
 };

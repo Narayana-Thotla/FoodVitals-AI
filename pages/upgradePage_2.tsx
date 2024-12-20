@@ -2,8 +2,7 @@ import React from "react";
 import { PricingCard } from "@/components/pricingCard_2";
 import { PricingHeader } from "@/components/pricingHeader_2";
 
-const UpgradePage = () => {
-
+const UpgradePage = ({ session, status }: any) => {
   const plans = [
     {
       name: "Free",
@@ -47,7 +46,12 @@ const UpgradePage = () => {
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan) => (
-            <PricingCard key={plan.name} {...plan} />
+            <PricingCard
+              key={plan.name}
+              {...plan}
+              session={session}
+              status={status}
+            />
           ))}
         </div>
 

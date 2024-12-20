@@ -18,6 +18,8 @@ interface PricingCardProps {
   highlighted?: boolean;
   ctaText?: string;
   scanLimit?: string;
+  session: any; // Add session as part of the props
+  status: any;
 }
 
 export function PricingCard({
@@ -29,8 +31,10 @@ export function PricingCard({
   highlighted = true,
   ctaText = "Get Started",
   scanLimit,
+  session,
+  status,
 }: PricingCardProps) {
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
   const [email, setemail] = useState("");
   const [loading, setloading] = useState(false);
 
