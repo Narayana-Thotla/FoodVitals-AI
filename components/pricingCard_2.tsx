@@ -38,8 +38,22 @@ export function PricingCard({
   // const { data: session, status } = useSession();
   const [email, setemail] = useState("");
   const [loading, setloading] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   const router = useRouter();
+
+
+  useEffect(() => {
+    setIsClient(true);
+    if (status == "loading") {
+      return;
+    }
+    if (status == "authenticated" ) {
+      console.log('user_email in pricing card:',session.user.email)
+      setemail(session?.user?.email || "");
+    }
+  }, [status, session]);
+
 
   const onSubscribe = async () => {
     try {
@@ -63,14 +77,10 @@ export function PricingCard({
     router.push("/scan");
   };
 
-  useEffect(() => {
-    if (status == "loading") {
-      return;
-    }
-    if (status == "authenticated") {
-      setemail(session?.user?.email || "");
-    }
-  }, [status, session]);
+  if (!isClient) {
+    return null; // Ensure the component doesn't render until after it's client-side
+  }
+
 
   return (
     <div
