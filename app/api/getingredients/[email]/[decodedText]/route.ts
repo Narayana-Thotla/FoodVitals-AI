@@ -67,7 +67,7 @@
                   //(edited using response instead of nextresponse)//
 //-------------------------------------------------------------------------------
 
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -79,26 +79,34 @@ export async function GET(
   const { email, decodedText } = params;
 
   try {
+    // Fetch product details
     const response = await fetch(
       `https://world.openfoodfacts.org/api/v0/product/${decodedText}`
     );
+
+    if (!response.ok) {
+      return new Response(
+        JSON.stringify({ message: "Failed to fetch product data" }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
     const data = await response.json();
-    const dataFormat = JSON.stringify(data);
 
     if (data.status === 1) {
       await createProduct(data, email);
       return new Response(
-        JSON.stringify({ data: dataFormat }),
+        JSON.stringify({ data }),
         { status: 200, headers: { "Content-Type": "application/json" } }
       );
     } else {
       return new Response(
-        JSON.stringify({ message: "Data not found" }),
-        { status: 500, headers: { "Content-Type": "application/json" } }
+        JSON.stringify({ message: "Product not found" }),
+        { status: 404, headers: { "Content-Type": "application/json" } }
       );
     }
   } catch (error) {
-    console.error("Error fetching product data:", error);
+    console.error("Error in GET handler:", error);
     return new Response(
       JSON.stringify({ message: "Internal server error" }),
       { status: 500, headers: { "Content-Type": "application/json" } }
@@ -107,31 +115,24 @@ export async function GET(
 }
 
 const createProduct = async (data: any, email: string) => {
-  const finduser = await prisma.users.findUnique({
-    where: {
-      email: email,
-    },
-  });
-  const idOfUser = finduser?.id;
-
-  if (data && idOfUser) {
-    try {
-      const newUser = await prisma.product.create({
-        data: {
-          user_id: idOfUser,
-          product_code: data.product.code,
-          product_name: data.product.product_name,
-          product_image_url: data.product.image_url,
-          product_ingredients: data.product.ingredients_text,
-        },
-      });
-      if (newUser) {
-        console.log("User product created successfully!!");
-      }
-    } catch (error) {
-      console.error("Error creating product:", error);
+  try {
+    const user = await prisma.users.findUnique({ where: { email } });
+    if (!user) {
+      console.error("User not found");
+      return;
     }
-  } else {
-    console.log("Error in creating product");
+
+    await prisma.product.create({
+      data: {
+        user_id: user.id,
+        product_code: data.product.code,
+        product_name: data.product.product_name,
+        product_image_url: data.product.image_url,
+        product_ingredients: data.product.ingredients_text,
+      },
+    });
+  } catch (error) {
+    console.error("Error creating product:", error);
   }
 };
+
