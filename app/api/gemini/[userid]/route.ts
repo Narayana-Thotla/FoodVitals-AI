@@ -14,7 +14,14 @@ export async function POST(
   let productIngredients = await req.json();
   console.log(productIngredients);
 
-  const res = await fetch(`/api/healthprofile/${userid}/all`);
+  // const res = await fetch(`/api/healthprofile/${userid}/all`);
+  const res = await fetch(`/api/healthprofile/${userid}/all`, {
+    method: "GET", // Explicitly specify the GET method
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
   console.log("res of healthprofile in gemini rouer:", res);
   const hpData = await res.json();
   const hpJSONData = await JSON.parse(hpData.data);
