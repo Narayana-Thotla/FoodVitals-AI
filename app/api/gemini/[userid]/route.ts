@@ -21,6 +21,7 @@ export async function POST(
       "Content-Type": "application/json",
     },
   });
+  
 
   console.log("res of healthprofile in gemini rouer:", res);
   const hpData = await res.json();
