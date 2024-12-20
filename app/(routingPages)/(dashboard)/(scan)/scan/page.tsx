@@ -289,12 +289,20 @@ const geminiApiCall = async (
   try {
     setloading(true);
 
+
+    const hpres = await fetch(`/api/healthprofile/${session?.user?.email}/all`);
+    const hpData = await hpres.json();
+
     const res = await fetch(`/api/gemini/${session?.user?.email}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(productIngredient),
+      // body: JSON.stringify(productIngredient),
+      body: JSON.stringify({
+        productIngredients: JSON.stringify(productIngredient), // Stringify the productIngredients
+        healthProfileData: hpData, // Send health profile data as is
+      }),
     });
 
     console.log("res of geminiapicall:", res);
@@ -380,14 +388,6 @@ const BackendScanPage = () => {
             theme: "light",
           });
           router.push("/upgrade");
-        }
-
-        const healthProfileData = await fetch(
-          `/api/healthprofile/${session?.user?.email}/all`
-        );
-        const hpData = await healthProfileData.json();
-        if (hpData) {
-          localStorage.setItem("healthProfileData", JSON.stringify(hpData));
         }
       }
     };

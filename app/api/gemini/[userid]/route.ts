@@ -11,7 +11,17 @@ export async function POST(
   const { userid } = params;
 
   // console.log(process.env.OPENAI_API_KEY);
-  let productIngredients = await req.json();
+  // let productIngredients = await req.json();
+
+
+  const body = await req.json();
+
+  // Access and parse productIngredients (which was stringified on the client side)
+  const productIngredients = JSON.parse(body.productIngredients); // Product ingredients parsed back into an object
+  const healthProfileData = body.healthProfileData; // Health profile data is already an object
+  const hpJSONData = await JSON.parse(healthProfileData);
+
+
   console.log(productIngredients);
   console.log('userid in gemini route:!!!',userid)
 
@@ -24,7 +34,6 @@ export async function POST(
   // const hpData = await res.json();
   // console.log('hpdata:',hpData)
   // const hpJSONData = await JSON.parse(hpData.data);
-  const hpJSONData = await JSON.parse(localStorage.getItem("healthProfileData")|| '');
   
 
   if (!productIngredients) {
