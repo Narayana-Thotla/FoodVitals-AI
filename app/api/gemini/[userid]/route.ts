@@ -20,8 +20,8 @@ export async function POST(
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeout);
 
-  const res = await fetch(`http://localhost:3000/api/healthprofile/${userid}/all`);
-  // const res = await fetch(`https://food-vitals-ai.vercel.app/api/healthprofile/${userid}/all`);
+  // const res = await fetch(`http://localhost:3000/api/healthprofile/${userid}/all`);
+  const res = await fetch(`https://food-vitals-ai.vercel.app/api/healthprofile/${userid}/all`);
 
 
   console.log("res of healthprofile in gemini rouer:", res);
