@@ -292,6 +292,7 @@ const geminiApiCall = async (
 
     const hpres = await fetch(`/api/healthprofile/${session?.user?.email}/all`);
     const hpData = await hpres.json();
+    console.log('hpdata in scan page:',hpData)
 
     const res = await fetch(`/api/gemini/${session?.user?.email}`, {
       method: "POST",

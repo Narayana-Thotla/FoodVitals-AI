@@ -19,11 +19,13 @@ export async function POST(
   // Access and parse productIngredients (which was stringified on the client side)
   const productIngredients = JSON.parse(body.productIngredients); // Product ingredients parsed back into an object
   const healthProfileData = body.healthProfileData; // Health profile data is already an object
-  const hpJSONData = await JSON.parse(healthProfileData);
+  const  parsedJSONData = await JSON.parse(healthProfileData);
+  const hpJSONData = await JSON.parse(parsedJSONData.data)
 
 
   console.log(productIngredients);
   console.log('userid in gemini route:!!!',userid)
+console.log('hpjsondata:',healthProfileData,hpJSONData,parsedJSONData);
 
 
   // const res = await fetch(`http://localhost:3000/api/healthprofile/${userid}/all`);
@@ -33,7 +35,8 @@ export async function POST(
   // console.log("res of healthprofile in gemini rouer:", res);
   // const hpData = await res.json();
   // console.log('hpdata:',hpData)
-  // const hpJSONData = await JSON.parse(hpData.data);
+  // const hpJSONDatas = await JSON.parse(hpData.data);
+  // console.log('hpdatassss:',hpJSONDatas);
   
 
   if (!productIngredients) {
