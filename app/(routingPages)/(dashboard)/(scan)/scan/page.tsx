@@ -225,13 +225,18 @@ const sendScannedCodeToBackend = async (
     const res = await fetch(
       `/api/getingredients/${session?.user?.email}/${decodedText}`
     );
+    console.log('res:',res)
     const data = await res.json();
+    // console.log('data:',data.data.product.ingredients_text)
     const objData = await JSON.parse(data.data);
+    // const objData = data.data
+
+    console.log('data:',res,data,objData)
     setproductInfo(objData);
-    // console.log(
-    //   "data fetched in sendScannedCodeToBackend:",
-    //   objData.product.ingredients_text
-    // );
+    console.log(
+      "data fetched in sendScannedCodeToBackend:",
+      objData.product.ingredients_text
+    );
 
     if (!res.ok) {
       toast("Sorry product not found!!!", {
@@ -292,6 +297,7 @@ const geminiApiCall = async (
       body: JSON.stringify(productIngredient),
     });
 
+    console.log('res of geminiapicall:',res)
     const resMessFromgemini = await res.json();
     // console.log("response message from chatgpt!!!:", resMessFromgemini.message);
 
