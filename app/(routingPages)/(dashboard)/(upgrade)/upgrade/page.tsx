@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 
 // import { UpgradePage } from '@/pages/upgradePage'
-import { UpgradePage } from "@/pages/upgradePage_2";
+import UpgradePage from "@/pages/upgradePage_2"
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useStore } from "@/zustand/zustandStore";

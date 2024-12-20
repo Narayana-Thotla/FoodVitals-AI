@@ -1,11 +1,10 @@
-import React from 'react';
-import { PricingCard } from '@/components/pricingCard_2';
-import { PricingHeader } from '@/components/pricingHeader_2';
-import { signIn,useSession } from 'next-auth/react';
+import React from "react";
+import { PricingCard } from "@/components/pricingCard_2";
+import { PricingHeader } from "@/components/pricingHeader_2";
+import { signIn, useSession } from "next-auth/react";
 
-export function UpgradePage() {
-
-  const {data:session,status} = useSession()
+const UpgradePage = () => {
+  const { data: session, status } = useSession();
 
   const plans = [
     {
@@ -22,7 +21,7 @@ export function UpgradePage() {
         { text: "Custom dietary preferences", included: false },
         // { text: "API access", included: false },
       ],
-      ctaText:'continue',
+      ctaText: "continue",
     },
     {
       name: "Pro",
@@ -38,14 +37,10 @@ export function UpgradePage() {
         { text: "Scan history (unlimited)", included: true },
         // { text: "API access", included: false },
       ],
-      ctaText:'Get Started',
+      ctaText: "Get Started",
       highlighted: true,
     },
-    
   ];
-
-
-  
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
@@ -60,16 +55,22 @@ export function UpgradePage() {
 
         <div className="mt-16 text-center space-y-4">
           <p className="text-gray-600">
-            Need a custom plan or have questions? {" "}
-            <a href="#" className="text-blue-600 font-semibold hover:text-blue-700">
+            Need a custom plan or have questions?{" "}
+            <a
+              href="#"
+              className="text-blue-600 font-semibold hover:text-blue-700"
+            >
               Contact our sales team
             </a>
           </p>
           <p className="text-sm text-gray-500">
-            All plans include a 14-day money-back guarantee. No credit card required for free tier.
+            All plans include a 14-day money-back guarantee. No credit card
+            required for free tier.
           </p>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default UpgradePage;
