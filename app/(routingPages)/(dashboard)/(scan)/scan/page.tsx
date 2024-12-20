@@ -225,13 +225,13 @@ const sendScannedCodeToBackend = async (
     const res = await fetch(
       `/api/getingredients/${session?.user?.email}/${decodedText}`
     );
-    console.log('res:',res)
+    console.log("res:", res);
     const data = await res.json();
     // console.log('data:',data.data.product.ingredients_text)
     const objData = await JSON.parse(data.data);
     // const objData = data.data
 
-    console.log('data:',res,data,objData)
+    console.log("data:", res, data, objData);
     setproductInfo(objData);
     console.log(
       "data fetched in sendScannedCodeToBackend:",
@@ -297,7 +297,7 @@ const geminiApiCall = async (
       body: JSON.stringify(productIngredient),
     });
 
-    console.log('res of geminiapicall:',res)
+    console.log("res of geminiapicall:", res);
     const resMessFromgemini = await res.json();
     // console.log("response message from chatgpt!!!:", resMessFromgemini.message);
 
@@ -381,11 +381,19 @@ const BackendScanPage = () => {
           });
           router.push("/upgrade");
         }
+
+        const healthProfileData = await fetch(
+          `/api/healthprofile/${session?.user?.email}/all`
+        );
+        const hpData = await healthProfileData.json();
+        if (hpData) {
+          localStorage.setItem("healthProfileData", JSON.stringify(hpData));
+        }
       }
     };
 
     checkApiLimit();
-  }, [session,updateCount,updateModel,router]);
+  }, [session, updateCount, updateModel, router]);
 
   // console.log(loading);
 

@@ -16,22 +16,21 @@ export async function POST(
   console.log('userid in gemini route:!!!',userid)
 
 
-  const timeout = 15000; // 10 seconds
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), timeout);
-
   // const res = await fetch(`http://localhost:3000/api/healthprofile/${userid}/all`);
-  const res = await fetch(`https://food-vitals-ai.vercel.app/api/healthprofile/${userid}/all`);
+  // const res = await fetch(`https://food-vitals-ai.vercel.app/api/healthprofile/${userid}/all`);
 
 
-  console.log("res of healthprofile in gemini rouer:", res);
-  const hpData = await res.json();
-  console.log('hpdata:',hpData)
-  const hpJSONData = await JSON.parse(hpData.data);
+  // console.log("res of healthprofile in gemini rouer:", res);
+  // const hpData = await res.json();
+  // console.log('hpdata:',hpData)
+  // const hpJSONData = await JSON.parse(hpData.data);
+  const hpJSONData = await JSON.parse(localStorage.getItem("healthProfileData")|| '');
+  
 
-  if (!res.ok && !productIngredients) {
+  if (!productIngredients) {
     return NextResponse.json({
-      error: "error in fetching health profile data from server",
+      // error: "error in fetching health profile data from server",
+      error: "error in fetching ingredients data ",
       status: 500,
     });
   }
