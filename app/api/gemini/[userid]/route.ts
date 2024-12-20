@@ -14,7 +14,7 @@ export async function POST(
   let productIngredients = await req.json();
   console.log(productIngredients);
 
-  const res = await fetch(`/api/healthprofile/${userid}/all`);
+  const res = await fetch(`https://food-vitals-ai.vercel.app/api/healthprofile/${userid}/all`);
   console.log("res of healthprofile in gemini rouer:", res);
   const hpData = await res.json();
   const hpJSONData = await JSON.parse(hpData.data);
