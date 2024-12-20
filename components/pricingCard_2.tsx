@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import { PricingFeature } from "./pricingFeatures_2";
 import { signIn, useSession } from "next-auth/react";

@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import { PricingCard } from "@/components/pricingCard_2";
 import { PricingHeader } from "@/components/pricingHeader_2";
