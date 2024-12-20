@@ -301,7 +301,7 @@ const geminiApiCall = async (
       // body: JSON.stringify(productIngredient),
       body: JSON.stringify({
         productIngredients: JSON.stringify(productIngredient), // Stringify the productIngredients
-        healthProfileData: hpData, // Send health profile data as is
+        healthProfileData: JSON.stringify(hpData), // Send health profile data as is
       }),
     });
 
