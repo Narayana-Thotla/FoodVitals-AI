@@ -13,6 +13,7 @@ export async function POST(
   // console.log(process.env.OPENAI_API_KEY);
   let productIngredients = await req.json();
   console.log(productIngredients);
+  console.log(userid)
 
   // const res = await fetch(`/api/healthprofile/${userid}/all`);
   const res = await fetch(`https://food-vitals-ai.vercel.app/api/healthprofile/${userid}/all`);
