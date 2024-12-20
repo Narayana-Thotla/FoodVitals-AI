@@ -1,10 +1,8 @@
 import React from "react";
 import { PricingCard } from "@/components/pricingCard_2";
 import { PricingHeader } from "@/components/pricingHeader_2";
-import { signIn, useSession } from "next-auth/react";
 
 const UpgradePage = () => {
-  const { data: session, status } = useSession();
 
   const plans = [
     {
