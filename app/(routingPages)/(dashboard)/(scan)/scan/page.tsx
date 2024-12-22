@@ -122,7 +122,8 @@ const scanBarcode = async (
        * { id: "id", label: "label" }
        */
       if (devices && devices.length) {
-        var cameraId = devices[0].id; // Use the first camera
+        // var cameraId = devices[0].id; // Use the first camera
+        var cameraId = devices[1] ? devices[1].id : devices[0].id;
         html5QrCode = new Html5Qrcode("reader");
 
         html5QrCode
@@ -288,7 +289,6 @@ const geminiApiCall = async (
 ) => {
   try {
     setloading(true);
-
 
     const hpres = await fetch(`/api/healthprofile/${session?.user?.email}/all`);
     const hpData = await hpres.json();
