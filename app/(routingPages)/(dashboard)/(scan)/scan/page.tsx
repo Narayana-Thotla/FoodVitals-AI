@@ -568,7 +568,7 @@ const BackendScanPage = () => {
 
             <div className="my-2 w-full">
               <h4 className="text-xl font-bold  text-white">Summary</h4>
-              <div className="p-1.5 bg-slate-50 text-md font-normal  rounded-md w-full h-[30vw]  overflow-y-auto scrollbar-none mx-auto">
+              <div className="p-1.5 bg-slate-50 text-md font-normal  rounded-md w-full h-[60vw]  overflow-y-auto scrollbar-none mx-auto">
                 {/* bg-gradient-to-r from-violet-300 to-fuchsia-300 bg-opacity-5 */}
 
                 {/* {loading? <p>loading...</p>: <div>{summaryText}</div>} */}
