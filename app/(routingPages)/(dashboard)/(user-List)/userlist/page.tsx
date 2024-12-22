@@ -50,10 +50,10 @@ const Page = () => {
   const { data: session, status } = useSession();
 
   useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
     async function fetchProducts() {
-      if (status === "unauthenticated") {
-        router.push("/");
-      }
       try {
         const result = await apiLimitCount(session);
         updateCount(result.count);
@@ -114,7 +114,7 @@ const Page = () => {
                     onClick={() => {
                       handleDeleteListItem(item, setproductsInfo);
                     }}
-                    className="cursor-pointer"
+                    className="cursor-pointer "
                   />
                 </div>
               );
