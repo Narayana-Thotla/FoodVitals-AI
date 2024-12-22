@@ -568,7 +568,7 @@ const BackendScanPage = () => {
 
             <div className="my-2 w-full">
               <h4 className="text-xl font-bold  text-white">Summary</h4>
-              <div className="p-1.5 bg-slate-50 text-md font-normal  rounded-md w-full h-[65vw]  overflow-y-auto scrollbar-none mx-auto">
+              <div className="p-1.5 bg-slate-50 text-md font-normal  rounded-md w-full h-[65vw]   overflow-y-auto scrollbar-none mx-auto">
                 {/* bg-gradient-to-r from-violet-300 to-fuchsia-300 bg-opacity-5 */}
 
                 {/* {loading? <p>loading...</p>: <div>{summaryText}</div>} */}
@@ -589,7 +589,7 @@ const BackendScanPage = () => {
                 />
               </div>
               <div className="text-white overflow-auto w-full h-20">
-                <div className=" bg-gradient-to-r from-green-500 via-orange-400 to-red-400 rounded-md p-1 overflow-y-scroll scrollbar-none">
+                <div className=" bg-gradient-to-r from-green-500 via-orange-400 to-red-400 rounded-md p-1 overflow-y-scroll scrollbar-none h-full">
                   {loading ? (
                     <Loader />
                   ) : !summaryIndicator ? (
