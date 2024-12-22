@@ -134,7 +134,7 @@ const scanBarcode = async (
             },
             (decodedText: any, decodedResult: any) => {
               // Process decoded QR code
-              console.log("scanned value:", decodedText, decodedResult);
+              // console.log("scanned value:", decodedText, decodedResult);
               setdecodedtext(decodedText);
 
               toast(`decoded text:${decodedText}`, {
