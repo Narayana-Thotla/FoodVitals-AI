@@ -8,18 +8,14 @@ import Typewriter from "typewriter-effect";
 
 export default function Home() {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session,status } = useSession();
   //console.log("session inside loginpage:", session);
 
   useEffect(() => {
-    if (session) {
+    if (status === 'authenticated') {
       router.push("/scan");
     }
-  }, [session, router]);
-
-  if (session) {
-    router.push("/scan");
-  }
+  }, [session,status, router]);
 
   return (
     <>

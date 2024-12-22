@@ -8,6 +8,8 @@ import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { toast } from "react-toastify";
+// import Circle_Loader from "@/components/ui/circle_loader_ui";
+import Circle_Loader from "@/components/ui/circle_loader_ui";
 
 import {
   Accordion,
@@ -65,10 +67,12 @@ const healthprofileItems = [
   },
 ];
 
-console.log(loopOfField[0]);
+// console.log(loopOfField[0]);
 
 const Page = () => {
   const [inputValue, setInputValue] = useState("");
+  const [loading, setloading] = useState(false);
+  const [saveLoading, setsaveLoading] = useState(false);
   const [userHealthData, setuserHealthData] = useState<hecon[]>([]);
   const storeVal = useStore((state: any) => state.count);
   const updateCount = useStore((state: any) => state.updateCount);
@@ -129,7 +133,8 @@ const Page = () => {
     }
 
     try {
-     // console.log(heaCon);
+      // console.log(heaCon);
+      setsaveLoading(true);
       const response = await fetch(
         `/api/healthprofile/${session?.user?.email}/${heaCon}`,
         {
@@ -154,6 +159,7 @@ const Page = () => {
           theme: "light",
         });
         setInputValue("");
+        setsaveLoading(false);
       } else {
         const errorData = await response.json();
         // alert(`Error: ${errorData.message}`);
@@ -185,12 +191,18 @@ const Page = () => {
 
   const deleteVal = async (hpfield: any, item: any) => {
     //console.log(hpfield, item);
-    const res = await fetch(
-      `/api/healthprofile/${session?.user?.email}/${hpfield}/${item}`
-    );
-    const dataaa = await res.json();
-    await setuserHealthData(dataaa.editedData);
-    //console.log("dlelete val json:", dataaa.editedData);
+    try {
+      setloading(true);
+      const res = await fetch(
+        `/api/healthprofile/${session?.user?.email}/${hpfield}/${item}`
+      );
+      const dataaa = await res.json();
+      await setuserHealthData(dataaa.editedData);
+      setloading(false);
+      //console.log("dlelete val json:", dataaa.editedData);
+    } catch (error: any) {
+      console.log("error in deleteval in healthprofile page:", error.message);
+    }
   };
 
   return (
@@ -232,7 +244,11 @@ const Page = () => {
                               variant="outline"
                               className=" bg-slate-400"
                             >
-                              Save
+                              {saveLoading ? (
+                                <Circle_Loader className="w-4 h-4" />
+                              ) : (
+                                "Save"
+                              )}
                             </Button>
                           </div>
                         </div>
@@ -248,9 +264,17 @@ const Page = () => {
                                     <div className="">
                                       <ChevronRight />
                                     </div>
-                                    <div className="px-2"> {item}</div>
+                                    <div className="px-2">
+                                      {" "}
+                                      {loading ? (
+                                        <Circle_Loader className="w-4 h-4" />
+                                      ) : (
+                                        item
+                                      )}
+                                    </div>
                                   </div>
                                   <div
+                                    className="hover:bg-slate-200 p-1 "
                                     onClick={() => {
                                       deleteVal(
                                         loopOfField[indexOfParent],
@@ -258,7 +282,11 @@ const Page = () => {
                                       );
                                     }}
                                   >
-                                    <Trash2 className="cursor-pointer" />
+                                    {loading ? (
+                                      ""
+                                    ) : (
+                                      <Trash2 className="cursor-pointer " />
+                                    )}
                                   </div>
                                 </div>
                               </div>

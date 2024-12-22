@@ -23,9 +23,9 @@ export async function POST(
   const hpJSONData = await JSON.parse(parsedJSONData.data)
 
 
-  console.log(productIngredients);
-  console.log('userid in gemini route:!!!',userid)
-console.log('hpjsondata:',healthProfileData,hpJSONData,parsedJSONData);
+//   console.log(productIngredients);
+//   console.log('userid in gemini route:!!!',userid)
+// console.log('hpjsondata:',healthProfileData,hpJSONData,parsedJSONData);
 
 
   // const res = await fetch(`http://localhost:3000/api/healthprofile/${userid}/all`);

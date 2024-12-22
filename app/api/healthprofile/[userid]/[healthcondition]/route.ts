@@ -105,7 +105,7 @@ export async function GET(
 
   const data = JSON.stringify(hpData);
   const jsonData = JSON.parse(data);
-console.log('data in get healthcondition:',data);
+// console.log('data in get healthcondition:',data);
 
   if (hpData) {
     // console.log("healthprofile data found in the db:", jsonData[0]);

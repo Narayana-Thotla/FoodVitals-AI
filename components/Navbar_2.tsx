@@ -5,6 +5,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
 import fv from "./../public/fv-ai-logo.png";
 import { useRouter } from "next/navigation";
+import Circle_Loader from "@/components/ui/circle_loader_ui";
 
 const Navbar_2 = () => {
   const { data: session, status } = useSession();
@@ -51,13 +52,15 @@ const Navbar_2 = () => {
                   aria-haspopup="true"
                 >
                   <span className="sr-only">Open user menu</span>
-                  <Image
-                    className="h-10 w-10 border-2 border-slate-100 rounded-full"
-                    src={session?.user?.image || fv}
-                    alt="User Avatar"
-                    width={32}
-                    height={32}
-                  />
+                  <div>
+                    <Image
+                      className="h-10 w-10  border-2 border-slate-100 rounded-full"
+                      src={session?.user?.image || fv}
+                      alt="User Avatar"
+                      width={32}
+                      height={32}
+                    />
+                  </div>
                 </button>
 
                 {/* Dropdown Menu */}

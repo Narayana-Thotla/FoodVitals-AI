@@ -1,9 +1,10 @@
-'use client'
+"use client";
 import React from "react";
 import { PricingFeature } from "./pricingFeatures_2";
 import { signIn, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Circle_Loader from "./ui/circle_loader_ui";
 
 interface Feature {
   text: string;
@@ -42,18 +43,16 @@ export function PricingCard({
 
   const router = useRouter();
 
-
   useEffect(() => {
     setIsClient(true);
     if (status == "loading") {
       return;
     }
-    if (status == "authenticated" ) {
+    if (status == "authenticated") {
       // console.log('user_email in pricing card:',session.user.email)
       setemail(session?.user?.email || "");
     }
   }, [status, session]);
-
 
   const onSubscribe = async () => {
     try {
@@ -80,7 +79,6 @@ export function PricingCard({
   if (!isClient) {
     return null; // Ensure the component doesn't render until after it's client-side
   }
-
 
   return (
     <div
@@ -137,13 +135,13 @@ export function PricingCard({
 
       <button
         onClick={name === "Pro" ? onSubscribe : goToScanPage}
-        className={`w-full py-3 px-6 rounded-lg font-semibold transition-all hover:scale-90 ${
+        className={`w-full flex justify-center py-3 px-6 rounded-lg font-semibold transition-all hover:scale-90 ${
           highlighted
             ? "bg-white text-blue-600 hover:bg-blue-50"
             : "bg-blue-600 text-white hover:bg-blue-700"
         }`}
       >
-        {ctaText}
+        {loading ? <Circle_Loader className="w-4 h-4" /> : ctaText}
       </button>
     </div>
   );

@@ -130,7 +130,7 @@ const Page = () => {
                   className="h-full flex items-center w-full border-gray-200 border p-4 rounded-sm bg-slate-400 shadow-xl"
                 >
                   <Image
-                    className="mr-7"
+                    className="mr-7 w-auto h-auto"
                     src={(item.product_image_url as string) || fv}
                     width={150}
                     height={150}

@@ -7,7 +7,7 @@ export const apiLimitCount = async (session: any) => {
       `/api/apilimit/checkapilimit/${session?.user?.email}`
     );
     const result = await apiLimitStatus.json();
-    console.log("result of apilimit:", result.count);
+    // console.log("result of apilimit:", result.count);
   
     return result;
   };

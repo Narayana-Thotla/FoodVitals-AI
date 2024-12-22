@@ -23,6 +23,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { useStore } from "@/zustand/zustandStore";
+import { useRouter } from "next/navigation";
 
 // Menu items.
 const items = [
@@ -60,6 +61,7 @@ const items = [
 
 export function AppSidebar({ count }: any) {
   //console.log("count inside appsidebar:", count);
+  const router = useRouter();
   const storeVal = useStore((state: any) => state.count);
   const proVal = useStore((state: any) => state.isInProModel);
   //console.log("coutn value from zustand:", storeVal, proVal);
@@ -69,12 +71,14 @@ export function AppSidebar({ count }: any) {
       <div className="bg-white">
         <Sidebar className="bg-white">
           <SidebarHeader className="bg-white ">
-            <div className="flex items-center gap-1.5">
+            <div className="flex  items-center gap-1.5">
               <Image
-                className="rounded-md"
+                className="rounded-md "
                 src={fv_ai}
                 width={75}
+                height={75}
                 alt="missing img"
+                // style={{ width: "auto", height: "auto" }}
               />
               <span className="text-xl font-bold text-gray-800 ">
                 FoodVitals-AI
@@ -120,6 +124,9 @@ export function AppSidebar({ count }: any) {
                     </div>
 
                     <button
+                      onClick={() => {
+                        router.push("/upgrade");
+                      }}
                       type="button"
                       className="text-gray-900 bg-gradient-to-r from-teal-300 to-lime-400 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-bold rounded-lg text-md px-5  py-1 text-center me-2 "
                     >
