@@ -122,25 +122,27 @@ const Page = () => {
         </div>
 
         <div className="bg-white border-green-600 ">
-          <div className="flex m-2 p-2 bg-white flex-wrap w-[72vw] justify-between  ">
+          <div className="flex m-2 p-2 bg-white flex-wrap w-[98%] justify-between  ">
             {productsInfo.map((item, index) => {
               return (
                 <div
                   key={index}
-                  className="h-full flex items-center w-full border-gray-200 border p-4 rounded-sm bg-slate-400 shadow-xl"
+                  className="h-full flex  items-center justify-between w-full border-gray-200 border p-4 rounded-sm bg-slate-400 shadow-xl "
                 >
-                  <Image
-                    className="mr-7 w-auto h-auto"
-                    src={(item.product_image_url as string) || fv}
-                    width={150}
-                    height={150}
-                    alt="Picture of the author"
-                  />
-                  <div className="flex-grow">
-                    <h2 className="text-gray-900 title-font font-medium">
-                      {item.product_name}
-                    </h2>
-                    <p className="text-gray-500">&nbsp;</p>
+                  <div className="sm:block md:flex gap-2">
+                    <Image
+                      className=" w-auto h-auto "
+                      src={(item.product_image_url as string) || fv}
+                      width={150}
+                      height={150}
+                      alt="Picture of the author"
+                    />
+                    <div className="flex-grow ">
+                      <h2 className="text-gray-900 title-font font-medium">
+                        {item.product_name}
+                      </h2>
+                      <p className="text-gray-500">&nbsp;</p>
+                    </div>
                   </div>
 
                   {/* <!-- Dropdown menu --> */}
